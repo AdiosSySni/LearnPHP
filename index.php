@@ -1,161 +1,66 @@
+
 <?php
-// $num = 10;
-// $num1 =& $num;
 
+// class User {
+//     public function __construct(
+//         private string $name,
+//         private int $old
+//     ){}
 
-// for($i=0; $i < 10; $i++) {
-//     $num+=1;
-//     echo $num1.PHP_EOL;
-// }
-
-// define('CONSTANT', 'Hello world');
-// // CONSNT = 10;
-
-// echo CONSTANT;
-
-// // define('arr', array(
-// //     '1',
-// //     '2',
-// //     '3'
-// // ));
-
-// // echo arr[0];
-
-// $x= 2;
-
-// $result = match($x) {
-//     1 => 'Единица',
-//     2 => 'Двойка',
-//     3 => 'Тройка'
-// };
-
-// echo $result.PHP_EOL;
-
-
-
-// class BaseClass {
-//     function __construct() {
-//         print "Конструктор класса BaseClass\n";
-//     }
-//  }
- 
-//  class SubClass extends BaseClass {
-//     function __construct() {
-//         parent::__construct();
-//         print "Конструктор класса SubClass\n";
-//     }
-//  }
- 
-//  class OtherSubClass extends BaseClass {
-//      // наследует конструктор BaseClass
-//  }
- 
-//  // Конструктор класса BaseClass
-//  $obj = new BaseClass();
- 
-//  // Конструктор класса BaseClass
-//  // Конструктор класса SubClass
-//  $obj = new SubClass();
- 
-//  // Конструктор класса BaseClass
-//  $obj = new OtherSubClass();
-
-
-// class Main 
-// {
-  
-//     public string $str = 'Hello world';
-
-//     final public function func(?string $newVal = null) {
-//        // $string = 'Hello world';
-//        if ($newVal !== null) {
-//            $this->str = $newVal;
-//        }
-//        echo $this->str;
-//        // return $string;
+//     public function getData() : string {
+//         return $this->name . '' . $this->old;
+      
 //     }
 // }
+// require ('index.html');
 
-// $obj = new Main();
-// $obj -> func();
+// echo $user1 = new User($_POST['name'], $_POST['old']);
 
+// echo $user1 = new User($_GET['name'], $_GET['old']);
+// echo $user1;
+// if(!empty($_Get['name']) && !empty($_GET['old'])) {
+//   echo $user1->getData();
+// }
 
-abstract class Car {
-    // private ?int $position = null;
+// $arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// $res = 0;
+	
+// foreach($arr as $item) {
+//    $res += $item;
+// }
 
-    public function __construct(
-        protected string $brand,
-        protected string $model,
-        private ?int $position = 5
-    )
-    {
-        // echo __CLASS__.':'.__METHOD__."<br>";
-    }
+// echo 'Средне арифмитическое значение: ' . $res / count($arr);
 
-    public function getPosition() : ?int {
-        // echo __CLASS__.':'.__METHOD__."<br>";
-        return $this->position;
-    }
+// $arr = ['1' =>6, '2' => 7, '3' => 8, '4' => 9, '5'=> 10];
+// $resElem = 0;
+// $resKey = 0;
+// $res = 0;
 
-    public function move(int $speed, int $time) : void{
-        // echo __CLASS__.':'.__METHOD__."<br>";
-        $this->position += $speed * $time;
-    }
+// foreach($arr as $key => $item) {
+//     $resElem += $item;
+//     $resKey += $key;
+// }
 
-    abstract public function getModel() : string;
-}
-
-
-class Lexus extends Car {
-    public function __construct(string $model)
-    {
-        // echo __CLASS__.':'.__METHOD__."<br>";
-        parent::__construct('Lexus', $model);
-    }
-    public function getModel() : string {
-        // echo __CLASS__.':'.__METHOD__."<br>";
-        return $this->model . ' ' . $this->brand;
-    }
-}
-
-class Porsche extends Car {
-    public function __construct(string $model)
-    {
-        // echo __CLASS__.':'.__METHOD__."<br>";
-        parent::__construct('Porsche', $model);
-    }
-
-    public function getModel() : string {
-        // echo __CLASS__.':'.__METHOD__."<br>";
-        return $this->brand . ' ' . $this->model;
-    }
-}
+// echo 'Деление елементов на ключи: '. $res = $resKey / $resElem;
 
 
-require 'index.htm';
-// 
-$p911 = new Porsche('911');
-// echo $p911 -> getModel().'<br>';
+// foreach($arr as $key => $item) {
+//     $res += $item. '<br>';
+// }
 
-$lexus = new Lexus('470');
-// echo $lexus -> getModel().'<br>';
+// echo 'Сумма возрастов: '. $res;
 
-if (!empty($_GET['speed']) && !empty($_GET['time'])) {
-    $p911 -> move($_GET['speed'], $_GET['time']);
-    echo $p911 -> getModel().'<br>';
-}
+// foreach($arr as $elem) {
+//     $res += $elem;
+//     // echo key($arr) . ' '. $elem . ' ';
+// }
+// echo 'Сумма: ' . $res;
+include_once('menu.php');
+?>
 
-if (!empty($_GET['speed']) && !empty($_GET['time'])) {
-    $lexus -> move($_GET['speed'], $_GET['time']);
-    echo $lexus -> getModel().'<br>';
-}
+<h1>Главная</h1>
 
+<?php
+    include_once('footer.php'); 
+?>
 
-// $p911 = new Car('Porshe', '911', 50);
-// echo $p911 -> getPosition().'<br>';
-// $p911 -> move(10, 50);
-// echo $p911 -> getPosition();
-
-
-
- ?>
