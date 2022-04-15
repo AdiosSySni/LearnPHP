@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\map;
+
     session_start();
     require 'index.html';
     // $_SESSION['test'] = 'abcd';
@@ -32,11 +35,28 @@
             header("Location: /index.php");
 
         $sumtxt = file_get_contents('text1.txt') + file_get_contents('text2.txt');
-        echo $sumtxt;
-        file_put_contents('txt/txt.txt', $sumtxt);
-        echo 'Результат сложения: ' . file_get_contents('txt/txt.txt');
+        // echo $sumtxt;
 
-?>         
+        file_put_contents('txt/txt.txt', $sumtxt);
+        // echo 'Результат сложения: ' . file_get_contents('txt/txt.txt');
+        // rename('text3.txt','txt/copy.txt');
+        // unlink('txt/copy.txt');
+
+        // copy('text2.txt','txt/copy.txt');
+        // unlink('text2.txt');
+
+        // echo filesize('txt/copy.txt');
+
+        // if(file_exists('txt/txt.txt') and filesize('txt/txt.txt') < 20480)
+        //     echo file_get_contents('txt/txt.txt');
+        // else 
+        //     echo 'Файл превышает 20кб';
+
+        $arr = ['one','two','three'];
+        foreach($arr as $item)
+            mkdir($item);
+            
+?>      
 
 
 
