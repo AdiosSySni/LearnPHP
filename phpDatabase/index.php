@@ -12,7 +12,7 @@
         </form>
 <?php
 
-    }
+ 
 
     $query = mysqli_query($connect, "SELECT * FROM users");
         echo '<table border = 1> <tr><th>Name</th> <th>Passowrd</th><tr>';
@@ -21,6 +21,7 @@
         echo '<tr> <td>'.$result['name'] . '</td> <td>' . $result['password'] . '</td> </tr>';
     }
         echo '</table>';
+    }
 
     if(!empty($_POST['name']) and !empty($_POST['password'])) {
         $name = $_POST['name'];
@@ -37,16 +38,27 @@
         $queryName = mysqli_query($connect, "SELECT * FROM users");
         echo '<a href="insert.php"> Добавить </a> <br> 
         <table border = 1> <tr><th>Login</th> <th>Password</th> <th>Delete</th> <th>Edit</th> </tr>';
-        while($resulName = mysqli_fetch_array($queryName)) {
-            echo '<tr><td>'. $resultName['name'] . '</td><td> <a href="delete.php?del_id="' . 
+        while($resultName = mysqli_fetch_array($queryName)) {
+            echo '<tr><td>'. $resultName['name'] . '<td>' . $resultName['password'] .  '</td><td> <a href="delete.php?del_id="' . 
             $resultName['id'] . '>Delete</a></td> <td> <a href = "edit.php?edit_id="' . $resultName['id'] . '>Edit</a></td></tr>'; 
         }
         echo '</table>';
+
+        if($name != $result['name']) {
+            echo 'Логин и пароль неверные <a href="index.php"> Назад </a>';
+            echo '<br><br>';
+            
+            $queryName = mysqli_query($connect,"SELECT * FROM users");
+            echo'<table border = 1><tr><th>Login</th><th>Password</th></tr>';
+            while($resultName = mysqli_fetch_array($queryName)){
+                echo'<tr><td>'.$resultName['name'].'</td><td>'.$resultName['password'].'</td></tr>';
+            } 
+            echo '</table>';
+
+        }    
     }
 
-        if($name != $result['login']) {
-            echo 'Логин и пароль неверные <a href="index.php"> Назад </a>';
-        }
-
+    
+?>
     
     
