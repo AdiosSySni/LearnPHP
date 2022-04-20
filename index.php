@@ -1,69 +1,64 @@
 <?php
-session_start();
-// echo $_SESSION['test'];
-if(!empty($_SESSION))
-    foreach($_SESSION as $item)
-        echo $item . ' ';
+    // require_once('index.html');
+    error_reporting(E_ALL);
+    require_once('database.php');
 
-// echo $_SESSION['surname'] . ' ' . $_SESSION['name'];
+    if(empty($_POST))  {
+?>      
+        <form action="" method="post">
+            <label>Имя <input type="name" name="name" required> </label>
+            <label>Пароль <input type="password" name="password" required> </label>
+            <input type="submit" value="Войти">
+        </form>
+<?php
 
+ 
 
-    // echo ($_GET['test1'] + $_GET['test2'] + $_GET['test3']);
-// $pass = 123;
+    $query = mysqli_query($connect, "SELECT * FROM users");
+        echo '<table border = 1> <tr><th>Name</th> <th>Passowrd</th><tr>';
 
-// if(empty($_GET)) 
-//     echo ('Введите пароль');
-//     else 
-//         if($pass == $_GET['password']) 
-//             echo ('Верный пароль'.'<br>' . 'Имя пользователя: ' . $_GET['name']);
-//         else 
-//             echo ('Пароль не верный');
+    while($result = mysqli_fetch_array($query)) {
+        echo '<tr> <td>'.$result['name'] . '</td> <td>' . $result['password'] . '</td> </tr>';
+    }
+        echo '</table>';
+    }
 
-// require('index.html');
+    if(!empty($_POST['name']) and !empty($_POST['password'])) {
+        $name = $_POST['name'];
+        $password = $_POST['password'];
+        
+        $query = mysqli_query($connect, "SELECT * FROM users WHERE name = '$name' AND password = '$password' ");
+        
+        $result = mysqli_fetch_array($query);
+        if($name == $result['name']) {
+            echo ' Вы вошли как' .  PHP_EOL . $name . PHP_EOL . '<a href="index.php"> Выйти </a>';
+            echo '<br><br>';
+        }
+        
+        $queryName = mysqli_query($connect, "SELECT * FROM users");
+        echo '<a href="insert.php"> Добавить </a> <br> 
+        <table border = 1> <tr><th>Login</th> <th>Password</th> <th>Delete</th> <th>Edit</th> </tr>';
+        while($resultName = mysqli_fetch_array($queryName)) {
+            echo '<tr><td>'. $resultName['name'] . '<td>' . $resultName['password'] .  '</td><td> <a href="delete.php?del_id="' . 
+            $resultName['id'] . '>Delete</a></td> <td> <a href = "edit.php?edit_id="' . $resultName['id'] . '>Edit</a></td></tr>'; 
+        }
+        echo '</table>';
 
-// if(!empty($_GET)) {
-//     if(!empty($_GET['surname'] and !empty($_GET['name'])))
-//         echo 'Name: '. $_GET['surname'] . ' ' . $_GET['name'] . '<br> Animals: ';
+        if($name != $result['name']) {
+            echo 'Логин и пароль неверные <a href="index.php"> Назад </a>';
+            echo '<br><br>';
+            
+            $queryName = mysqli_query($connect,"SELECT * FROM users");
+            echo'<table border = 1><tr><th>Login</th><th>Password</th></tr>';
+            while($resultName = mysqli_fetch_array($queryName)){
+                echo'<tr><td>'.$resultName['name'].'</td><td>'.$resultName['password'].'</td></tr>';
+            } 
+            echo '</table>';
 
-//     if(isset($_GET['cat'])) 
-//         echo ''. $_GET['cat'] . ', ';
+        }    
+    }
 
-//     if(isset($_GET['dog'])) 
-//         echo $_GET['dog'] . ', ';
-
-//     if(isset($_GET['parrot'])) 
-//         echo $_GET['parrot'] . ' ';
-
-//     if(!empty($_GET['lang']) and $_GET['lang'] === 'eng')
-//         echo  '<br> Language: '. $_GET['lang'];
-
-//     if(!empty($_GET['lang']) and $_GET['lang'] === 'rus')
-//         echo  '<br> Language: '. $_GET['lang'];
-// }
-
-
-
-?> 
-
-<!-- <form action="" method="GET">
-    <input type="text" name="surname">
-	<input type="text" name="name"> <br><br>
-	<input type="checkbox" name="cat" value="cat"> Кошка <br><br>
-    <input type="checkbox" name="dog" value="dog"> Собака <br><br>
-    <input type="checkbox" name="parrot" value="parrot"> Попугай <br><br> 
-    <input type="radio" value="eng" name="lang"> Английский <br><br> 
-    <input type="radio" value="rus" name="lang"> Русский <br><br>
-    <input type="submit">
-</form> -->
-
-
-<table border="1" cellspacing="1" cellpadding="1">
-    <th>Фамилия</th>
-    <th>Имя</th>
-    <th>Отчество</th>
-    <tr>
-        <td><?php echo $_SESSION['surname']  ?></td>    
-        <td><?php echo $_SESSION['name']; ?></td>
-        <td><?php echo $_SESSION['fatherName']; ?></td>
-    </tr>
-</table>
+    
+?>
+    
+    
