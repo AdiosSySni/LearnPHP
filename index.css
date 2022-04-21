@@ -15,7 +15,7 @@ html, body{
     display: flex;
     align-items: center;
     justify-content: ce;
-    background-color: bisque;
+    background-color: yellowgreen;
 }
 
 .container {
@@ -31,7 +31,7 @@ html, body{
 }
 
 .header .container a {
-    width:100px;
+    width:140px;
     height:40px;
     text-decoration: none;
     display: flex;
@@ -60,5 +60,5 @@ main{
 
 footer{
     height: 100px;
-    background-color: bisque;
+    background-color: yellowgreen;
 }
